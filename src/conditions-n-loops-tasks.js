@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,9 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const comparison = a > b ? a : b;
+  return comparison > c ? comparison : c;
 }
 
 /**
@@ -82,15 +83,18 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  return (
+    (a === b && a + b > c && c > 0) ||
+    (a === c && a + c > b && b > 0) ||
+    (b === c && c + b > a && a > 0)
+  );
 }
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
  * In this task, the use of methods of the String and Array classes is not allowed.
- *
- * @param {number} num - The number to convert.
+/* @param {number} num - The number to convert.
  * @return {string} The Roman numeral representation of the number.
  *
  * @example:
@@ -100,8 +104,94 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const strNum = `${num}`;
+  let result = '';
+  if (strNum.length === 2) {
+    switch (strNum[0]) {
+      case '1':
+        result += 'X';
+        break;
+      case '2':
+        result += 'XX';
+        break;
+      case '3':
+        result += 'XXX';
+        break;
+      default:
+        break;
+    }
+    switch (strNum[1]) {
+      case '1':
+        result += 'I';
+        break;
+      case '2':
+        result += 'II';
+        break;
+      case '3':
+        result += 'III';
+        break;
+      case '4':
+        result += 'IV';
+        break;
+      case '5':
+        result += 'V';
+        break;
+      case '6':
+        result += 'VI';
+        break;
+      case '7':
+        result += 'VII';
+        break;
+      case '8':
+        result += 'VIII';
+        break;
+      case '9':
+        result += 'IX';
+        break;
+      case '0':
+        result += '';
+        break;
+      default:
+        break;
+    }
+  } else {
+    switch (strNum[0]) {
+      case '1':
+        result += 'I';
+        break;
+      case '2':
+        result += 'II';
+        break;
+      case '3':
+        result += 'III';
+        break;
+      case '4':
+        result += 'IV';
+        break;
+      case '5':
+        result += 'V';
+        break;
+      case '6':
+        result += 'VI';
+        break;
+      case '7':
+        result += 'VII';
+        break;
+      case '8':
+        result += 'VIII';
+        break;
+      case '9':
+        result += 'IX';
+        break;
+      case '0':
+        result += '';
+        break;
+      default:
+        break;
+    }
+  }
+  return result;
 }
 
 /**
@@ -119,8 +209,56 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-':
+        result += 'minus ';
+        break;
+      case '.':
+      case ',':
+        result += 'point ';
+        break;
+      case '0':
+        result += 'zero ';
+        break;
+      case '1':
+        result += 'one ';
+        break;
+      case '2':
+        result += 'two ';
+        break;
+      case '3':
+        result += 'three ';
+        break;
+      case '4':
+        result += 'four ';
+        break;
+      case '5':
+        result += 'five ';
+        break;
+      case '6':
+        result += 'six ';
+        break;
+      case '7':
+        result += 'seven ';
+        break;
+      case '8':
+        result += 'eight ';
+        break;
+      case '9':
+        result += 'nine ';
+        break;
+      default:
+        break;
+    }
+  }
+  let cutResult = '';
+  for (let i = 0; i < result.length - 1; i += 1) {
+    cutResult += result[i];
+  }
+  return cutResult;
 }
 
 /**
@@ -135,8 +273,17 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let res;
+  for (let i = 0; i < str.length / 2; i += 1) {
+    if (str[i] === str[str.length - 1 - i]) {
+      res = true;
+    } else {
+      res = false;
+      break;
+    }
+  }
+  return res;
 }
 
 /**
@@ -153,8 +300,16 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let res;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      res = i;
+      break;
+    }
+    res = -1;
+  }
+  return res;
 }
 
 /**
@@ -171,9 +326,22 @@ function getIndexOf(/* str, letter */) {
  *  123450, 0   => true
  *  12345, 0    => false
  *  12345, 6    => false
+ *  console.log(strNum);
+ *  console.log(strDigit);
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const strNum = `${num}`;
+  const strDigit = `${digit}`;
+  let res = 888;
+  for (let i = 0; i < strNum.length; i += 1) {
+    if (strNum[i] === strDigit) {
+      res = true;
+      break;
+    } else {
+      res = false;
+    }
+  }
+  return res;
 }
 
 /**
@@ -295,6 +463,28 @@ function shuffleChar(/* str, iterations */) {
  */
 function getNearestBigger(/* number */) {
   throw new Error('Not implemented');
+  // function strRec(string) {
+  //   let result = '';
+  //   for (let i = 0; i < string.length; i += 1) {
+  //     if (string[i] >= string[i + 1]) {
+  //       result += string[i];
+  //     } else if (string[i] < string[i + 1]) {
+  //       result += string[i + 1] + string[i];
+  //     }
+  //   }
+  // }
+
+  // const str = `${number}`;
+  // let result = '';
+  // for (let i = str.length - 1; i >= 0; i -= 1) {
+  //   if (str[i] < str[i - 1]) {
+  //     for (let y = 0; y === i; y += 1) {
+  //       result += result + str[y];
+  //     }
+  //   } else {
+  //     result = number;
+  //   }
+  // }
 }
 
 module.exports = {
