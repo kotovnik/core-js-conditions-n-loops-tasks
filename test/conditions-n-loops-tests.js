@@ -508,14 +508,14 @@ describe('core-js-conditions-n-loops', () => {
       assert.equal(tasks.shuffleChar('qwerty', 1), 'qetwry');
       assert.equal(tasks.shuffleChar('qwerty', 2), 'qtrewy');
       assert.equal(tasks.shuffleChar('qwerty', 3), 'qrwtey');
-      // const lenght = 100;
-      // const iteration = 5;
-      // let str = '';
-      // for (let i = 0; i < lenght; i += 1) {
-      //   str += utility.getRandomNumberUtil(0, 9).toString();
-      // }
-      // const result = utility.getShuffleStringUtil(str, iteration);
-      // assert.equal(tasks.shuffleChar(str, iteration), result);
+      const lenght = 100;
+      const iteration = 5;
+      let str = '';
+      for (let i = 0; i < lenght; i += 1) {
+        str += utility.getRandomNumberUtil(0, 9).toString();
+      }
+      const result = utility.getShuffleStringUtil(str, iteration);
+      assert.equal(tasks.shuffleChar(str, iteration), result);
 
       assert.equal(
         forbidden.isCommented(tasks.shuffleChar),
