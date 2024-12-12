@@ -473,13 +473,14 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let res = str;
+  const index = res.length % 2 ? res.length : res.length - 1;
   for (let times = iterations; times > 0; times -= 1) {
     let startOfString = '';
     let endOfString = '';
-    for (let i = res.length % 2 ? res.length : res.length - 1; i > 0; i -= 2) {
-      endOfString = `${res[i]}${endOfString}`;
+    for (let i = 1; i <= index; i += 2) {
+      endOfString += res[i];
     }
-    for (let i = 0; i < res.length; i += 2) {
+    for (let i = 0; i <= index; i += 2) {
       startOfString += res[i];
     }
     res = startOfString + endOfString;
