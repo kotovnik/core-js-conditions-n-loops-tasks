@@ -334,8 +334,6 @@ function getIndexOf(str, letter) {
  *  123450, 0   => true
  *  12345, 0    => false
  *  12345, 6    => false
- *  console.log(strNum);
- *  console.log(strDigit);
  */
 function isContainNumber(num, digit) {
   const strNum = `${num}`;
@@ -473,8 +471,23 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let res = str;
+  let iterationLoop = 0;
   const index = res.length % 2 ? res.length : res.length - 1;
-  for (let times = iterations; times > 0; times -= 1) {
+  do {
+    let startOfString = '';
+    let endOfString = '';
+    for (let i = 1; i <= index; i += 2) {
+      endOfString += res[i];
+    }
+    for (let i = 0; i <= index; i += 2) {
+      startOfString += res[i];
+    }
+    res = startOfString + endOfString;
+    iterationLoop += 1;
+  } while (res !== str);
+  const times =
+    iterations < iterationLoop ? iterations : iterations % iterationLoop;
+  for (let j = 0; j < times; j += 1) {
     let startOfString = '';
     let endOfString = '';
     for (let i = 1; i <= index; i += 2) {
