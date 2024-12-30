@@ -517,32 +517,52 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
-  // function strRec(string) {
-  //   let result = '';
-  //   for (let i = 0; i < string.length; i += 1) {
-  //     if (string[i] >= string[i + 1]) {
-  //       result += string[i];
-  //     } else if (string[i] < string[i + 1]) {
-  //       result += string[i + 1] + string[i];
-  //     }
-  //   }
-  // }
-
-  // const str = `${number}`;
-  // let result = '';
-  // for (let i = str.length - 1; i >= 0; i -= 1) {
-  //   if (str[i] < str[i - 1]) {
-  //     for (let y = 0; y === i; y += 1) {
-  //       result += result + str[y];
-  //     }
-  //   } else {
-  //     result = number;
-  //   }
-  // }
+function getNearestBigger(number) {
+  const numberStr = `${number}`;
+  let result;
+  const arr = [];
+  for (let i = 0; i < numberStr.length; i += 1) {
+    arr.push(numberStr[i]);
+  }
+  for (let i = numberStr.length - 1; i > 0; i -= 1) {
+    if (arr[i] > arr[i - 1]) {
+      const restOfRight = arr.slice(i, arr.length).sort((a, b) => a - b);
+      console.log(`restOfRight: ${restOfRight}`);
+      const swap = arr[i - 1];
+      console.log(`swap: ${swap}`);
+      console.log(`позиция swap: ${i - 1}`);
+      let swapIt;
+      for (let k = 0; k < restOfRight.length; k += 1) {
+        if (swap < restOfRight[k]) {
+          swapIt = restOfRight[k];
+          console.log(`swapIt: ${swapIt}`);
+          break;
+        }
+      }
+      let position;
+      for (let y = arr.length - 1; y > 0; y -= 1) {
+        if (arr[y] === swapIt) {
+          position = y;
+          console.log(`position: ${position}`);
+          break;
+        }
+      }
+      arr[i - 1] = swapIt;
+      arr[position] = swap;
+      const sortRest = arr
+        .slice(i, arr.length)
+        .sort((a, b) => a - b)
+        .join('');
+      console.log(`sortRest: ${sortRest}`);
+      const deleteCount = arr.length - i;
+      arr.splice(i, deleteCount, sortRest);
+      console.log(`arr: ${arr}`);
+      result = arr.join('');
+      break;
+    }
+  }
+  return +result;
 }
-
 module.exports = {
   isPositive,
   getMaxNumber,
