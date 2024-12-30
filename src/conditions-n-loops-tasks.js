@@ -518,6 +518,7 @@ function shuffleChar(str, iterations) {
  * @returns {number} The nearest larger number, or original number if none exists.
  */
 function getNearestBigger(number) {
+  console.log(`number: ${number}`);
   const numberStr = `${number}`;
   let result;
   const arr = [];
@@ -526,7 +527,11 @@ function getNearestBigger(number) {
   }
   for (let i = numberStr.length - 1; i > 0; i -= 1) {
     if (arr[i] > arr[i - 1]) {
-      const restOfRight = arr.slice(i, arr.length).sort((a, b) => a - b);
+      const restOfRight = [];
+      for (let j = i; j < arr.length; j += 1) {
+        restOfRight.push(arr[j]);
+      }
+      restOfRight.sort((a, b) => a - b);
       console.log(`restOfRight: ${restOfRight}`);
       const swap = arr[i - 1];
       console.log(`swap: ${swap}`);
@@ -549,15 +554,29 @@ function getNearestBigger(number) {
       }
       arr[i - 1] = swapIt;
       arr[position] = swap;
-      const sortRest = arr
-        .slice(i, arr.length)
+
+      let sortRest = '';
+      for (let m = i; m < arr.length; m += 1) {
+        sortRest += arr[m];
+      }
+      sortRest = sortRest
+        .split('')
         .sort((a, b) => a - b)
         .join('');
       console.log(`sortRest: ${sortRest}`);
       const deleteCount = arr.length - i;
-      arr.splice(i, deleteCount, sortRest);
+      for (let n = 0; n < deleteCount; n += 1) {
+        arr.pop();
+      }
+
+      for (let t = 0; t < sortRest.length; t += 1) {
+        arr.push(sortRest[t]);
+      }
       console.log(`arr: ${arr}`);
-      result = arr.join('');
+      result = '';
+      for (let q = 0; q < arr.length; q += 1) {
+        result += arr[q];
+      }
       break;
     }
   }
