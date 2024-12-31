@@ -518,7 +518,6 @@ function shuffleChar(str, iterations) {
  * @returns {number} The nearest larger number, or original number if none exists.
  */
 function getNearestBigger(number) {
-  console.log(`number: ${number}`);
   const numberStr = `${number}`;
   let result;
   const arr = [];
@@ -532,15 +531,11 @@ function getNearestBigger(number) {
         restOfRight.push(arr[j]);
       }
       restOfRight.sort((a, b) => a - b);
-      console.log(`restOfRight: ${restOfRight}`);
       const swap = arr[i - 1];
-      console.log(`swap: ${swap}`);
-      console.log(`позиция swap: ${i - 1}`);
       let swapIt;
       for (let k = 0; k < restOfRight.length; k += 1) {
         if (swap < restOfRight[k]) {
           swapIt = restOfRight[k];
-          console.log(`swapIt: ${swapIt}`);
           break;
         }
       }
@@ -548,22 +543,26 @@ function getNearestBigger(number) {
       for (let y = arr.length - 1; y > 0; y -= 1) {
         if (arr[y] === swapIt) {
           position = y;
-          console.log(`position: ${position}`);
           break;
         }
       }
       arr[i - 1] = swapIt;
       arr[position] = swap;
 
-      let sortRest = '';
+      let sortRestt = '';
       for (let m = i; m < arr.length; m += 1) {
-        sortRest += arr[m];
+        sortRestt += arr[m];
       }
-      sortRest = sortRest
-        .split('')
-        .sort((a, b) => a - b)
-        .join('');
-      console.log(`sortRest: ${sortRest}`);
+      const sortRestArr = [];
+      for (let r = 0; r < sortRestt.length; r += 1) {
+        sortRestArr.push(sortRestt[r]);
+      }
+      sortRestArr.sort((a, b) => a - b);
+
+      let sortRest = '';
+      for (let w = 0; w < sortRestArr.length; w += 1) {
+        sortRest += sortRestArr[w];
+      }
       const deleteCount = arr.length - i;
       for (let n = 0; n < deleteCount; n += 1) {
         arr.pop();
@@ -572,7 +571,6 @@ function getNearestBigger(number) {
       for (let t = 0; t < sortRest.length; t += 1) {
         arr.push(sortRest[t]);
       }
-      console.log(`arr: ${arr}`);
       result = '';
       for (let q = 0; q < arr.length; q += 1) {
         result += arr[q];
