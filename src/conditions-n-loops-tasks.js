@@ -520,16 +520,24 @@ function shuffleChar(str, iterations) {
 function getNearestBigger(number) {
   const numberStr = `${number}`;
   let result;
-  const arr = [];
-  for (let i = 0; i < numberStr.length; i += 1) {
-    arr.push(numberStr[i]);
+  function convertStringToArray(str, index) {
+    const arr = [];
+    for (let s = index; s < str.length; s += 1) {
+      arr.push(str[s]);
+    }
+    return arr;
   }
+  function convertArrayToString(arr, index) {
+    let str = '';
+    for (let i = index; i < arr.length; i += 1) {
+      str += arr[i];
+    }
+    return str;
+  }
+  const arr = convertStringToArray(numberStr, 0);
   for (let i = numberStr.length - 1; i > 0; i -= 1) {
     if (arr[i] > arr[i - 1]) {
-      const restOfRight = [];
-      for (let j = i; j < arr.length; j += 1) {
-        restOfRight.push(arr[j]);
-      }
+      const restOfRight = convertStringToArray(arr, i);
       restOfRight.sort((a, b) => a - b);
       const swap = arr[i - 1];
       let swapIt;
@@ -548,33 +556,18 @@ function getNearestBigger(number) {
       }
       arr[i - 1] = swapIt;
       arr[position] = swap;
-
-      let sortRestt = '';
-      for (let m = i; m < arr.length; m += 1) {
-        sortRestt += arr[m];
-      }
-      const sortRestArr = [];
-      for (let r = 0; r < sortRestt.length; r += 1) {
-        sortRestArr.push(sortRestt[r]);
-      }
+      const sortRestt = convertArrayToString(arr, i);
+      const sortRestArr = convertStringToArray(sortRestt, 0);
       sortRestArr.sort((a, b) => a - b);
-
-      let sortRest = '';
-      for (let w = 0; w < sortRestArr.length; w += 1) {
-        sortRest += sortRestArr[w];
-      }
+      const sortRest = convertArrayToString(sortRestArr, 0);
       const deleteCount = arr.length - i;
       for (let n = 0; n < deleteCount; n += 1) {
         arr.pop();
       }
-
       for (let t = 0; t < sortRest.length; t += 1) {
         arr.push(sortRest[t]);
       }
-      result = '';
-      for (let q = 0; q < arr.length; q += 1) {
-        result += arr[q];
-      }
+      result = convertArrayToString(arr, 0);
       break;
     }
   }
